@@ -1,0 +1,749 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charging Station</title>
+
+<style>
+.custom-checkbox {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 12px;
+  margin-right: 25px; /* Adjust the spacing between checkboxes */
+}
+
+
+.form-group label {
+  font-size: 1rem;
+  line-height: 1;
+  vertical-align: top;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  margin-top: 0.6rem;
+}
+</style>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    {% comment %} <div class="header">
+        <img class="logo" src="path-to-your-logo.png" alt="Company Logo">
+    </div> {% endcomment %}
+
+    <div class="sidebar">
+        <img class="logo" src="{% static 'img/LogoEVCW.png' %}" alt="Company Logo">
+        <hr class="divider">
+
+        <div class="sidebar-link">
+        <a href="{% url 'dashboard' %}"> <i class="fa-solid fa-house fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Dashboard</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'station' %}"> <i class="fa-solid fa-charging-station fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Charging Stations</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'rfid' %}"><i class="fa-solid fa-address-card fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; RFID Management</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'role' %}"><i class="fa-solid fa-bars-progress fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Role Management</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'user' %}"><i class="fa-solid fa-user-group fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; User Management</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'report' %}"><i class="fa-solid fa-chart-column fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Reports</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'login' %}"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Logout</a>
+        </div>
+    </div>
+
+
+    <div class="main">
+          <div class="top-bar">
+            <div class="CSM">
+              <h5>Charging Station Management</h5>
+            </div>
+              <div class="user">
+              <span style="font-size:18px; color: #fff; font-family: Poppins, sans-serif;">EVC &nbsp;&nbsp;</span>
+              <div class="dropdown">
+              <i class="fa-regular fa-circle-user fa-2xl" style="color: #ffffff;"></i>
+              <div class="dropdown-content">
+                <a href="{% url 'profile' %}"><i class="fa-regular fa-user fa-lg" style="color: # #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Profile</a> 
+                <a href="{% url 'login' %}"><i class="fa-solid fa-right-from-bracket fa-lg" style="color: # #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a> 
+              </div>
+              </div> &nbsp;&nbsp;
+              <div class="dropdown">
+              <i class="fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
+              <div class="dropdown-content">
+                  <a href="{% url 'newstation' %}">Add Charging Station </a> <!-- Profile option -->
+                  <a href="#">Add Charging Point</a> <!-- Logout option -->
+              </div>
+            </div>
+          </div>
+    </div>
+    
+
+        <div class="top-navbar">
+          <ul>
+              <li><a href="#info">General Info</a></li>
+              <li><a href="#points">Charging Points</a></li>
+              <li><a href="#photos">Photos</a></li>
+              <li><a href="#amenities">Amenities</a></li>
+              <li><a href="#reviews">Reviews</a></li>
+              <li><a href="#payouts">Payouts</a></li>
+              <div class=" d-md-flex ps-26 pt-2 justify-content-end">
+                <button class="btn btn-success " type="submit">Save</button>
+              </div>
+          </ul>
+        </div>
+
+      <div class="stationlist">
+
+          <div class="content" id="info">
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                    
+                  <fieldset>
+                  <br>
+                        <div class="form-group">
+                          <h6 class="col-md-6 control-label">Charging Station Name</h6>  
+                          <div class="col-md-8 inputGroupContainer">
+                          <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                          <input  name="station_name"  class="form-control"  type="text">
+                            </div>
+                          </div>
+                        </div>
+              
+                      
+                        <div class="form-group">
+                          <h6 class="col-md-4 control-label">Address</h6>  
+                          <div class="col-md-8 inputGroupContainer">
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                              <input name="address" placeholder="" class="form-control" type="text">
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <h6 class="col-md-4 control-label">City</h6>  
+                          <div class="col-md-8 inputGroupContainer">
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                              <input name="city" placeholder="" class="form-control" type="text">
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <h6 class="col-md-4 control-label">Zip Code</h6>  
+                          <div class="col-md-8 inputGroupContainer">
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                              <input name="zip" placeholder="" class="form-control" type="text">
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group"> 
+                          <h6 class="col-md-4 control-label">State</h6>
+                          <div class="col-md-8 selectContainer">
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                              <select name="state" class="form-control selectpicker">
+                                <option value="">Please select your state</option>
+                                
+                                <option>Andhra Pradesh</option>
+                                <option>Arunachal Pradesh</option>
+                                <option >Assam</option>
+                                <option >Bihar</option>
+                                <option >Chhattisgarh</option>
+                                <option >Goa</option>
+                                <option >Gujrat</option>
+                                <option >Haryana</option>
+                                <option >Himachal Pradesh</option>
+                                <option> Jharkhand</option>
+                                <option >Karnataka</option>
+                                <option >Kerala</option>
+                                <option >Madhya Pradesh</option>
+                                <option >Maharashtra</option>
+                                <option >Manipur</option>
+                                <option >Meghalaya</option>
+                                <option> Mizoram</option>
+                                <option >Nagaland</option>
+                                <option >Odisha</option>
+                                <option>Punjab</option>
+                                <option >Rajasthan</option>
+                                <option> Sikkim</option>
+                                <option >Tamil Nadu</option>
+                                <option >Telangana</option>
+                                <option>Tripura</option>
+                                <option>Uttar Pradesh</option>
+                                <option>Uttarakhand</option>
+                                <option>West Bengal</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <h6 class="col-md-4 control-label">Country</h6>  
+                          <div class="col-md-8 inputGroupContainer">
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                              <input name="country" placeholder="" class="form-control" type="text">
+                            </div>
+                          </div>
+                        </div>
+
+                        
+                          <h6 class="col-md-4 control-label">Station Type</h6> 
+                          <div class="form-group">
+                            
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="stationType" id="flexRadioDefault1" checked>
+                              <label class="form-check-label" for="flexRadioDefault1">
+                                Public
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="stationType" id="flexRadioDefault2">
+                              <label class="form-check-label" for="flexRadioDefault2">
+                                Private
+                              </label>
+                            </div>
+                          </div>
+                          
+                          
+                          <h6 class="col-md-4 control-label">Open 24/7</h6> 
+                          <div class="form-group">
+
+                            <div class="form-check">
+                              <input class="form-check-input  d-md-flex" type="radio" name="open24/7" id="flexRadioDefault3" checked>
+                              <label class="form-check-label" for="flexRadioDefault3">
+                                Yes
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="open24/7" id="flexRadioDefault4">
+                              <label class="form-check-label" for="flexRadioDefault4">
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <h6 class="col-md-4 control-label">Phone No.</h6>  
+                            <div class="col-md-8 inputGroupContainer">
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input name="phone" placeholder="" class="form-control" type="text">
+                              </div>
+                            </div>
+                          </div> 
+                        </div>
+
+                      <!-- Add more form fields here -->
+                      
+                        <div class="col-md-6">
+                          
+                          <br>
+                          Select co-ordinates : <strong>12.487963 lat, 85.7961237 long</strong>
+                          <br> <br>
+
+                          <div class="form-group">
+                              <h6 class="col-md-4 control-label" for="1">Lattitude :</h6>  
+                              <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group">
+                                  <span class="input-group-addon"></span>
+                                  <input name="phone" id="1" placeholder="12.558725" class="form-control" type="text">
+                                </div>
+                              </div>
+                          </div> 
+
+
+                          <div class="form-group">
+                              <h6 class="col-md-4 control-label" for="2">Longitude :</h6>  
+                              <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group">
+                                  <span class="input-group-addon"></span>
+                                  <input name="phone" id="2" placeholder="12.558725" class="form-control" type="text">
+                                </div>
+                              </div>
+                          </div> 
+
+                          <br>
+
+
+                          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.3836086273504!2d72.83205627507904!3d19.178440382047395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7e68aef4771%3A0xb9838e5f5c15c81b!2sEVC%20Global%20Mobility%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1686744669326!5m2!1sen!2sin" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </fieldset>
+                    
+                </div>
+              </div>
+          </div>
+        
+      
+          <div class="content" id="points">
+            <div class="tab-pane fade show" id="points" role="tabpanel" aria-labelledby="pills-points-tab" tabindex="0">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                      
+                  <!-- Add content for Section 1 here -->
+                  <br>
+                    <div class="form-group">
+                        <h6 class="col-md-5 control-label">Socket URL</h6>  
+                        <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="socket_url"  class="form-control"  type="text">
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="form-group">
+                        <h6 class="col-md-5 control-label">Charging Point Name</h6>  
+                        <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="point_name"  class="form-control"  type="text">
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="form-group">
+                        <h6 class="col-md-5 control-label">Charging Point ID</h6>  
+                        <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="point_id"  class="form-control"  type="text">
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="form-group">
+                      <h6 class="col-md-5 control-label">Connector Type</h6>  
+                        <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="connector_type" placeholder="CCS2" class="form-control"  type="text">
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="form-group">
+                      <h6 class="col-md-5 control-label">Charging Power</h6>  
+                      <div class="col-md-8 inputGroupContainer">
+                      <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input  name="charging_power" placeholder="30kWh"  class="form-control"  type="text">
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="form-group"> 
+                      <h6 class="col-md-6 control-label">EV Compatible </h6>
+                      <div class="col-md-8 selectContainer">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                          <select name="vehicle_type"  placeholder="4 Wheeler" class="form-control selectpicker">
+                            <option value="">Please select your Vehicle type</option>
+                            <option >2 Wheeler</option>
+                            <option >3 Wheeler</option>
+                            <option >4 Wheeler</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="form-group">
+                      <h6 class="col-md-5 control-label">Cost per Unit </h6>  
+                      <div class="col-md-8 inputGroupContainer">
+                      <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input  name="price" placeholder="" class="form-control"  type="text">
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="form-group">
+                      <h6 class="col-md-5 control-label">LICENSE</h6>  
+                      <div class="col-md-8 inputGroupContainer">
+                      <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input  name="license" placeholder="" class="form-control"  type="text">
+                        </div>
+                      </div>
+                    </div>
+        
+        
+                    <div class="form-group"> 
+                      <h6 class="col-md-5 control-label">Change Availability</h6>
+                      <div class="col-md-8 selectContainer">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                          <select name="change_availability" class="form-control selectpicker">
+                            <option value="">Change Availability</option>
+                            
+                            <option > Operative </option>
+                            <option > Inoperative </option>
+        
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <!-- Button or link to trigger the modal -->
+                    <div class="col-md-8">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Logs</button>
+                  </div>
+        
+                    <!-- Modal -->
+                    
+                    <div class="modal" id="myModal">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <!-- Modal body -->
+                          <div class="scroll-box1">
+                              <div class="modal-body" style="background-color: white; padding: 0; width: 100%;">
+                                <!-- Add your content here -->
+                                <script>
+                                  // Get the current date and time
+                                  var currentDate = new Date();
+                                
+                                  // Format the date and time string
+                                  var formattedTime = currentDate.toString();
+                                
+                                  // Display the formatted time in the designated element
+                                  document.getElementById("current-time").textContent = formattedTime;
+                                </script>
+                  
+                                <div class="log-container">
+                                  {% for callm_object in callm_objects %}
+                                  <p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#06d46d}</style><path d="M96 0C60.7 0 32 28.7 32 64V448c-17.7 0-32 14.3-32 32s14.3 32 32 32H320c17.7 0 32-14.3 32-32s-14.3-32-32-32V304h16c22.1 0 40 17.9 40 40v32c0 39.8 32.2 72 72 72s72-32.2 72-72V252.3c32.5-10.2 56-40.5 56-76.3V144c0-8.8-7.2-16-16-16H544V80c0-8.8-7.2-16-16-16s-16 7.2-16 16v48H480V80c0-8.8-7.2-16-16-16s-16 7.2-16 16v48H432c-8.8 0-16 7.2-16 16v32c0 35.8 23.5 66.1 56 76.3V376c0 13.3-10.7 24-24 24s-24-10.7-24-24V344c0-48.6-39.4-88-88-88H320V64c0-35.3-28.7-64-64-64H96zM216.9 82.7c6 4 8.5 11.5 6.3 18.3l-25 74.9H256c6.7 0 12.7 4.2 15 10.4s.5 13.3-4.6 17.7l-112 96c-5.5 4.7-13.4 5.1-19.3 1.1s-8.5-11.5-6.3-18.3l25-74.9H96c-6.7 0-12.7-4.2-15-10.4s-.5-13.3 4.6-17.7l112-96c5.5-4.7 13.4-5.1 19.3-1.1z"/></svg>&nbsp;&nbsp;
+                                    {{callm_object.message_id}}, {{callm_object.action}}, {{callm_object.payload}}</p>
+                                  <p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V280.4c-17-15.2-39.4-24.4-64-24.4H64c-24.6 0-47 9.2-64 24.4V96zM64 288H448c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V352c0-35.3 28.7-64 64-64zM320 416a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm128-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>&nbsp;&nbsp;
+                                    {{callm_object.call_result_obj.message_id}}, {{callm_object.call_result_obj.payload}}
+                                  </p>
+                                  <br />
+                                  {% endfor %}
+                                </div>
+            
+                                <div style="position: relative; padding-bottom: 80%; padding-top: 70px; height: 0; overflow: hidden;">
+                                  <!-- Add your content here -->
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+          
+          <div class="content" id="photos">
+            <div class="tab-pane fade show" id="photos" role="tabpanel" aria-labelledby="pills-photos-tab" tabindex="0">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                  <!-- Add content for Section 2 here -->
+                  <br>
+                    <h4>Upload a Photo</h4>
+                    
+                    <br>
+
+                      <input  type="file" name="photo"  id="photoInput"  accept="image/*"/>             
+                        {% for photo in photos %}
+                        <img src="{{ photo.photo.url }}" alt="Photo" />
+                        {% endfor %} 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+          <div class="content" id="amenities">
+              <!-- Add content for Section 3 here -->
+              <div class="tab-pane fade show" id="amenities" role="tabpanel" aria-labelledby="pills-amenities-tab" tabindex="0">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      
+                      <br>
+      
+                    <h6 style="font-weight:700">Food &amp; Drink</h6>
+                    <div class="form-group">
+                      <div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option01" value="Bar" name="food_drink"/>
+                          <label class="form-check-label" for="option01">Bar</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option02" value="Coffee" name="food_drink"/>
+                          <label class="form-check-label" for="option02">Coffee</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option03" value="Restaurant" name="food_drink"/>
+                          <label class="form-check-label" for="option03">Restaurant</label>
+                        </div>
+                      </div>
+                    </div>
+    
+                    <br />
+    
+                    <h6 style="font-weight:700">Things to Do</h6>
+                    <div class="form-group">
+                      <div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option001" value="Art" name ="Things_to_Do"/>
+                          <label class="form-check-label" for="option001">Art</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option002" value="Cinema" name = "Things_to_Do"/>
+                          <label class="form-check-label" for="option002">Cinema</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option003" value="Gym" name = "Things_to_Do"/>
+                          <label class="form-check-label" for="option003">Gym</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option004" value="Library" name = "Things_to_Do"/>
+                          <label class="form-check-label" for="option004">Library</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option005" value="Live Music" name = "Things_to_Do"/>
+                          <label class="form-check-label" for="option005">Live Music</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option006" value="Museum" name = "Things_to_Do"/>
+                          <label class="form-check-label" for="option006">Museum</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option007" value="Park" name = "Things_to_Do"/>
+                          <label class="form-check-label" for="option007">Park</label>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <br />
+        
+                    <h6 style="font-weight:700">Shopping</h6>
+                    <div class="form-group">
+                      <div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option0001" value="Beauty Supplies" name="Shopping"/>
+                          <label class="form-check-label" for="option0001">Beauty Supplies</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option0002" value="Car Dealers" name="Shopping"/>
+                          <label class="form-check-label" for="option0002">Car Dealers</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option0003" value="Cloths" name="Shopping"/>
+                          <label class="form-check-label" for="option0003">Cloths</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option0004" value="Electronics" name="Shopping"/>
+                          <label class="form-check-label" for="option0004">Electronics</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option0005" value="Groceries" name="Shopping"/>
+                          <label class="form-check-label" for="option0005">Groceries</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option0006" value="Shopping Center" name="Shopping"/>
+                          <label class="form-check-label" for="option0006">Shopping Center</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option0007" value="Sporting Goods" name="Shopping"/>
+                          <label class="form-check-label" for="option0007">Sporting Goods</label>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <br />
+        
+                    <h6 style="font-weight:700">Services</h6>
+                    <div class="form-group">
+                      <div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option00001" value="ATM" name="Services"/>
+                          <label class="form-check-label" for="option00001">ATM</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option00002" value="Car Repair" name="Services"/>
+                          <label class="form-check-label" for="option00002">Car Repair</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option00003" value="Car Wash" name="Services"/>
+                          <label class="form-check-label" for="option00003">Car Wash</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option00004" value="Dry Cleaning" name="Services"/>
+                          <label class="form-check-label" for="option00004">Dry Cleaning</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option00005" value="Food Shelter" name="Services"/>
+                          <label class="form-check-label" for="option00005">Food Shelter</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option00006" value="Hosspital &amp; Clinic" name="Services"/>
+                          <label class="form-check-label" for="option00006">Hospital &amp; Clinic</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input class="form-check-input" type="checkbox" id="option00007" value="Hotel" name="Services"/>
+                          <label class="form-check-label" for="option00007">Hotel</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input  class="form-check-input"  type="checkbox"  id="option00008"  value="Parking"  name="Services"/>
+                          <label class="form-check-label" for="option00008"  >Parking</label>
+                        </div>
+                        <div class="custom-checkbox">
+                          <input  class="form-check-input" type="checkbox"  id="option00009"  value="Post"  name="Services"/>
+                          <label class="form-check-label" for="option00009">Post</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+
+          <div class="content" id="reviews">
+            <br>
+
+            <h2>Reviews</h2>
+              <!-- Add content for Section 4 here -->
+              <div class="tab-pane fade show"  id="reviews" role="tabpanel" aria-labelledby="pills-reviews-tab" tabindex="0">
+                <div class="container">
+                  <div class="row">
+
+                <div class="scroll-box d-flex flex-wrap">
+                  {% for review in reviews %}
+    
+                  <div  class="card"  style="width: 18rem; margin-right: 5%; margin-top: 2%">
+                    <div class="card-body">
+                      <h6 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="0.9em" viewBox="0 0 448 512">
+                          <style>
+                            svg {
+                              fill: #06d46d;
+                            }
+                          </style>
+                          <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>&nbsp;&nbsp;<strong>{{review.name}}</strong>
+                          <br/></h6>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
+                          <style>
+                            svg {
+                              fill: #06d46d;
+                            }
+                          </style>
+                          <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>&nbsp;&nbsp;{{review.rating}}<br /></h6>
+                      <p class="card-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                          <style>
+                            svg {
+                              fill: #06d46d;
+                            }
+                          </style>
+                          <path
+                            d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64h96v80c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L309.3 416H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64z"/></svg>&nbsp;&nbsp;{{review.comment}}<br /><br />
+                      </p>
+                    </div>
+                  </div>
+    
+                  {% endfor %}
+                  </div>
+                </div>
+            </div>
+            </div>
+          </div>
+
+
+          <div class="content" id="payouts">
+            <!-- Add content for Section 4 here -->
+            <div class="tab-pane fade show" id="payouts" role="tabpanel" aria-labelledby="pills-payouts-tab" tabindex="0">
+                <div class="container">
+                  <div class="row">
+                  
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Bank Name</th>
+                    <th scope="col">Account Holder Name</th>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">IFSC Code</th>
+                    <th scope="col">Percentage Share</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>ICICI</td>
+                    <td>EVC</td>
+                    <td>0081075369214</td>
+                    <td>ICICI00019</td>
+                    <td>100%</td>
+                    <td>
+                      <button type="button" class="btn btn-link btn-sm" style:"text-decoration:none;">
+                        Edit
+                      </button>
+                      <button type="button" class="btn btn-link btn-sm" style:"text-decoration:none;">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+  // Tab-Pane change function
+function tabChange() {
+  var tabs = $('.nav-tabs > li');
+  var active = tabs.filter('.active');
+  var next = active.next('li').length? active.next('li').find('a') : tabs.filter(':first-child').find('a');
+  next.tab('show');
+}
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

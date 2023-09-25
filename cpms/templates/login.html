@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPMS Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="logcon">
+
+        <div class="left">
+            <div class="left-text">
+            <p>EVC GLOBAL VENDOR CMS</p> 
+            <div class="border-line"></div>
+            <p style="font-weight:normal;">Login to Access Dashboard</p> 
+            </div>
+            <div class="image-container">
+               
+            <img src="{% static 'img/loginpic.png' %}" alt="" style="width:100%; height:100vh" >
+            
+        </div>
+        
+        </div>
+
+        <div class="right">
+                
+            <form class="login100-form validate-form" method="post">
+                {% csrf_token %}
+                <div class="right-img">
+                    <img src="{% static 'img/Logo_Green.png' %}" alt="" style="width:250px; height:auto;" ></div>
+                    <br>
+                    <br>
+                    <div class="right-text">
+                <p>Log In</p>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email </label>
+                    <input type="email" class="form-control"  name="username" id="username" placeholder="@gmail.com">
+                  </div>
+                <label for="inputPassword5" class="form-label">Password</label>
+                <input type="password" id="password" name="pass" class="form-control" placeholder="Password" aria-describedby="passwordHelpBlock">
+                <div id="passwordHelpBlock" class="form-text">
+                Your password must be 8-20 characters long.
+                </div>
+                <br>
+                <a class="btn btn-success col-4 btn-lg" href="{% url 'dashboard' %}" role="button">Log In</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

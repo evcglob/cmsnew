@@ -1,0 +1,115 @@
+<i class="fa-solid fa-chart-line fa-2xl" style="color: #06d46d;"></i>
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charging Station</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    {% comment %} <div class="header">
+        <img class="logo" src="path-to-your-logo.png" alt="Company Logo">
+    </div> {% endcomment %}
+
+    <div class="sidebar">
+        <img class="logo" src="{% static 'img/LogoEVCW.png' %}" alt="Company Logo">
+        <hr class="divider">
+
+        <div class="sidebar-link">
+        <a href="{% url 'dashboard' %}"> <i class="fa-solid fa-house fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Dashboard</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'station' %}"> <i class="fa-solid fa-charging-station fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Charging Stations</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'rfid' %}"><i class="fa-solid fa-address-card fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; RFID Management</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'role' %}"><i class="fa-solid fa-bars-progress fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Role Management</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'user' %}"><i class="fa-solid fa-user-group fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; User Management</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'report' %}"><i class="fa-solid fa-chart-column fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Reports</a>
+        </div>
+        <div class="sidebar-link">
+        <a href="{% url 'login' %}"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp; Logout</a>
+        </div>
+
+
+    </div>
+
+
+    <div class="main">
+        <div class="top-bar">
+            <div class="CSM">
+              <h5>Charging Station Management</h5>
+              </div>
+              <div class="user">
+              <span style="font-size:18px; color: #fff; font-family: Poppins, sans-serif;">Sohan &nbsp;&nbsp;</span>
+              <div class="dropdown">
+              <i class="fa-regular fa-circle-user fa-2xl" style="color: #ffffff;"></i>
+              <div class="dropdown-content">
+                <a href="{% url 'profile' %}"><i class="fa-regular fa-user fa-lg" style="color: # #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Profile</a> 
+                <a href="{% url 'login' %}"><i class="fa-solid fa-right-from-bracket fa-lg" style="color: # #02552a;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a> 
+              </div>
+              </div> &nbsp;&nbsp;
+              <div class="dropdown">
+              <i class="fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i>
+              <div class="dropdown-content">
+                  <a href="{% url 'newstation' %}">Add Charging Station </a> <!-- Profile option -->
+                  <a href="#">Add Charging Point</a> <!-- Logout option -->
+              </div>
+            </div>
+          </div>
+      </div>
+
+        <div class="reportinfo">
+            <h6>Reports</h6>    
+        </div>
+
+        <div class="report">
+
+            <div class="date-range-picker">
+                <div class="reportpic">
+                <img src="{% static 'img/reportg.png' %}" style="height:200px; width:220px;" alt="">
+                </div>
+
+                <h4 style="text-align:center; font-size:20px;"> Download all reports from here.</h4>
+                <p style="text-align:center; font-size:12px;"> Note: Date range applies only to transcation reports.</p>
+            
+                <div class="fromto">
+                <label for="fromDate">From:</label>
+                <input type="date" id="fromDate">
+        
+                <label for="toDate">To:</label>
+                <input type="date" id="toDate">
+                </div>
+            </div>
+
+            <div class="botcon">
+            <button type="button" class="btn btn-outline-success btn-sm">Transaction Reports</button>
+            <button type="button" class="btn btn-outline-success btn-sm">Charging Station Reports</button>
+            <button type="button" class="btn btn-outline-success btn-sm">License Reports</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
